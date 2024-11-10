@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import ElevatorModel from './components/ElevatorModel';
 import ConfigPanel from './components/ConfigPanel';
 
 
-export interface Entrance {
-  width: number;
-  height: number;
-}
 
 export interface ElevatorConfig {
   width: number;
@@ -23,12 +19,13 @@ export interface ElevatorConfig {
   cpPosition: 'rightCenter' |'rightCorner' | 'leftCenter' | 'leftCorner' | 'frontCenter' | 'frontRight' | 'frontLeft';
   lightType: 'warm'|'white';
   spotFrame: 'gold'|'white'|'silver';
-
   entranceCount: 1 | 2;
-  entrance: Entrance;
 }
 
+
+
 function App() {
+
   const [config, setConfig] = useState<ElevatorConfig>({
     width: 1000,
     height: 2000,
@@ -41,25 +38,30 @@ function App() {
     cpPosition: 'leftCenter',
     ceilingMaterial:'ceiling1',
     entranceCount: 1,
-    entrance: {
-      width: 900,
-      height: 2000
-    },
-    lightType: 'warm',
+    lightType: 'white',
     spotFrame: 'gold'
     
+
   });
+
+
+
 
   return (
     <div className="flex h-screen bg-gray-100">
       <div className="flex-1 relative">
-        <Canvas>
-          <PerspectiveCamera makeDefault position={[4, 2, 4]} />
-          <ambientLight intensity={1.3} />
-          <pointLight position={[10, 10,10]} intensity={1.5} color="#ffffff" />
+        
+        <Canvas shadows>
+          <PerspectiveCamera makeDefault position={[2, 2, 2]} />
+          <ambientLight intensity={0.5} />
+
+          <directionalLight position={[0, 0, 0]} intensity={0.5} castShadow />
           <ElevatorModel config={config} />
-          <OrbitControls enableDamping dampingFactor={0.05} />
+
+          <OrbitControls dampingFactor={0.5} />
+
         </Canvas>
+      
       </div>
       <ConfigPanel config={config} setConfig={setConfig} />
     </div>
