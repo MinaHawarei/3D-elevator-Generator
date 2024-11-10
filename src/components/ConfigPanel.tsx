@@ -63,13 +63,9 @@ function ConfigPanel({ config, setConfig }: Props) {
     const { name, value, type } = e.target;
     
     if (name.startsWith('entrance.')) {
-      const entranceField = name.split('.')[1];
       setConfig({
         ...config,
-        entrance: {
-          ...config.entrance,
-          [entranceField]: Number(value)
-        }
+       
       });
     } else {
       setConfig({
@@ -177,9 +173,6 @@ function ConfigPanel({ config, setConfig }: Props) {
                 ))}
               </select>
             </div>
-
-
-
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">floor Material</h3>
             <div>
@@ -198,10 +191,6 @@ function ConfigPanel({ config, setConfig }: Props) {
               </select>
             </div>
           </div>
-          
-
-
-
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">ceiling Material</h3>
             <div>
@@ -315,5 +304,4 @@ function ConfigPanel({ config, setConfig }: Props) {
 
   );
 }
-
 export default ConfigPanel;
